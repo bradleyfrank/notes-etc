@@ -6,8 +6,6 @@
 %%$if($lt(%discnumber%,10),0)%discnumber%x$if($lt(%tracknumber%,10),0)%tracknumber%-$replace(%title%, ,_)%%
 ```
 
----
-
 ## HandBrake
 
 ```sh
@@ -19,8 +17,6 @@ transcode-video --encoder x265 -o movie.mkv ./
 # transcode a specific title to h265 mkv
 transcode-video --encoder x265 --title $title -o $title.mkv ./
 ```
-
----
 
 ## Nextcloud
 
@@ -35,8 +31,6 @@ docker exec nextcloud php occ files:scan \
     --user www-data \
     --path="<user>/files/path/to/dir"
 ```
-
----
 
 ## Plex
 

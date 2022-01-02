@@ -22,8 +22,6 @@ done <<< "$(kubectl --context $CONTEXT get secret $SECRET -n $NAMESPACE -o json 
   | jq -r '.data | with_entries(select(.key|match("DB_";"i")))[]')"
 ```
 
----
-
 ## Service Accounts
 
 ```sh

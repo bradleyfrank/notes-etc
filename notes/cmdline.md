@@ -177,6 +177,6 @@ tcpdump -w my_packet_capture.pcap
 
 ```sh
 # encrypt file with existing password
-ansible-vault encrypt --vault-id /path/to/password {{ file }}
-ansible-vault encrypt_string --stdin-name {{ variable_name }}
+ansible-vault encrypt --vault-id /path/to/password <file>
+ansible-vault encrypt_string --stdin-name <variable_name>
 ```

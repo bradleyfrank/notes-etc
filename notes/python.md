@@ -8,8 +8,6 @@
 - **`__var__`:** Indicates special methods defined by Python language.
 - **`_`:** Used as a name for temporary variables.
 
----
-
 ## Strings
 
 ```python
@@ -26,8 +24,6 @@
 >>> f"|{count:{padding}d}"
 '|        43'
 ```
-
----
 
 ## Matching / Switch Case
 
@@ -91,8 +87,6 @@ match message:
                 new_messages.append(SpawnFoodMessage())
 ```
 
----
-
 ## Arrays
 
 ```python
@@ -101,8 +95,6 @@ array = [['a', 'b'], ['c', 'd'], ['e', 'f']]
 transposed = zip(*array)
 print(transposed) # [('a', 'c', 'e'), ('b', 'd', 'f')]
 ```
-
----
 
 ## Loops
 
@@ -128,8 +120,6 @@ names = ["A","B","C"]
 list(map(str.lower, names)) # right
 ```
 
----
-
 ## Regex
 
 ```python
@@ -139,8 +129,6 @@ required_version = r'required_version\s=\s"[>=]+\s[0-9]+\.([0-9]+)"'
 if match := re.search(required_version, versions_tf_content):
     terraform_bin_path = match.group(1)
 ```
-
----
 
 ## Debugging
 
@@ -172,14 +160,13 @@ ipdb> result.headers
 ```sh
 conda create --name snakes python=3.5 # create environment
 conda env list # list environments
-```
 
-Updating Anaconda:
-
-```sh
+# activate/deactivate
 . /usr/local/anaconda3/bin/activate
+conda deactivate
+
+# updating
 conda update -n base conda -y
 conda update --prefix /usr/local/anaconda3 anaconda -y
 conda clean --all -y
-conda deactivate
 ```

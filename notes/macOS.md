@@ -7,8 +7,8 @@ system_profiler
 sw_vers
 
 # Terminal renaming
-printf "\e]1;%s\a" {{ name }} # tabs
-printf "\e]2;%s\a" {{ name }} # window
+printf "\e]1;%s\a" <name> # tabs
+printf "\e]2;%s\a" <name> # window
 
 # set hostname
 sudo scutil --set HostName "hostname.local"

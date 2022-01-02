@@ -44,8 +44,6 @@ yum install -y --downloadonly <package> --downloaddir=/root/
 yum check-update
 ```
 
----
-
 ## Filesystems
 
 ```sh
@@ -106,8 +104,6 @@ EOF
 chmod 400 /path/to/.cifs-auth
 ```
 
----
-
 ## Firewall
 
 ```sh
@@ -116,8 +112,6 @@ firewall-cmd --permanent --add-service=http --add-service=https --add-service=ss
 firewall-cmd --permanent --add-port=2222/tcp
 firewall-cmd --reload
 ```
-
----
 
 ## Time Syncing
 
@@ -129,8 +123,6 @@ chronyc makestep # step the system clock immediately
 [watch] chronyc tracking # check status
 chronyc sources [-v] # show time source configured in chrony.conf
 ```
-
----
 
 ## Cronjobs
 
@@ -149,8 +141,6 @@ Using `cron.{hourly,weekly,monthly}` files:
 
 - Exclude cron syntax
 - Include shebang interpreter line
-
----
 
 ## SELinux
 
@@ -173,8 +163,6 @@ semanage port -l # list ports
 semanage port -a -t http_cache_port_t -p tcp <port>
 semanage port -a -t ssh_port_t -p tcp <port>
 ```
-
----
 
 ## SSH
 
@@ -203,12 +191,10 @@ Remote port forwarding lets you tunnel a port from your local system through you
 ssh -R 6000:localhost:5000 remote.example.com
 ```
 
----
-
 ## Account Management
 
-* `useradd` is the low-level command
-* `adduser` can be a high-level utility that calls `useradd` or may be a symlink
+- `useradd` is the low-level command
+- `adduser` can be a high-level utility that calls `useradd` or may be a symlink
 
 ```sh
 # a generic user account to own file storage
@@ -237,8 +223,6 @@ useradd git \
   --uid 10100 \
   --gid 10100
 ```
-
----
 
 ## Networking
 

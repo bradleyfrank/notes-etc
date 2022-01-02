@@ -2,18 +2,18 @@
 
 ```sh
 # clone by tag
-git clone -b {{ tagname }} {{ repository }} .
+git clone -b <tagname> <repository> .
 ```
 
 ---
 
 ```sh
-git push --delete {{ remote_name }} {{ branch_name }} # delete remote branch
-git branch -d {{ branch_name }} # delete local branch
+git push --delete <remote_name> <branch_name> # delete remote branch
+git branch -d <branch_name> # delete local branch
 
-git branch –m {{ new_name }} # rename local branch
-git push origin -u {{ new_name }} # rename remote branch
-git push origin --delete {{ old_name }} # delete old branch
+git branch –m <new_name> # rename local branch
+git push origin -u <new_name> # rename remote branch
+git push origin --delete <old_name> # delete old branch
 ```
 
 ---
@@ -27,9 +27,9 @@ git diff --check # check for conflicts and whitespace errors
 ---
 
 ```sh
-git reset --hard [HEAD|{{ hash }}] # forget all the changes, clean start
-git reset {{ hash }} # edit, re-stage and re-commit files
-git reset --soft {{ hash }} # re-commit past commits, as one big commit
+git reset --hard [HEAD|<hash>] # forget all the changes, clean start
+git reset <hash> # edit, re-stage and re-commit files
+git reset --soft <hash> # re-commit past commits, as one big commit
 ```
 
 ---
@@ -44,7 +44,7 @@ git grep 'Build 0051' $(git rev-list --all) # search the content of commits
 
 ```sh
 # clone a repository containing submodules
-git clone --recursive {{ repo }}
+git clone --recursive <repo>
 
 # load submodules in a previously cloned repo
 git submodule update --init
@@ -52,13 +52,13 @@ git submodule update --init --recursive # for nested submodules
 
 # download eight submodules at once
 git submodule update --init --recursive -j 8
-git clone --recursive --jobs 8 {{ repo }}
+git clone --recursive --jobs 8 <repo>
 
 # pull all changes in submodules
 git submodule update --remote
 
 # add a child repository to a parent repository
-git submodule add {{ repo }}
+git submodule add <repo>
 
 # initialize an existing Git submodule
 git submodule init

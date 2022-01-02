@@ -40,8 +40,6 @@ kubectl proxy --port=8001
 curl http://localhost:8001/api/v1/namespace/default/pods
 ```
 
----
-
 ## Troubleshooting
 
 ```sh
@@ -51,8 +49,6 @@ $ k top pods --all-namespaces --sort-by=cpu
 $ k top nodes --sort-by=memory
 $ k top nodes --sort-by=cpu
 ```
-
----
 
 ## kubectl
 
@@ -84,8 +80,6 @@ KUBECONFIG= kubectl get nodes \
   --client-key <key> \
   --insecure-skip-tls-verify
 ```
-
----
 
 ## Krew Plugins
 

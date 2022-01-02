@@ -25,8 +25,6 @@ To uncomment blocks:
   b. to select chunks of text use shift + ←/→ arrow key
 3. press `d` or `x` to delete characters, repeatedly if necessary
 
----
-
 ## tmux
 
 Move a process to tmux:
@@ -54,7 +52,7 @@ Move a tmux pane from one window to another:
 :join-pane -t <window-index> [-h|-v]
 ```
 
----
+## Color Schemes
 
 |Name|Hex|R|G|B|Code|Name|
 |--- |--- |--- |--- |--- |--- |--- |
