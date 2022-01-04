@@ -56,6 +56,9 @@ fdupes --recurse --reverse --delete --noprompt .
 # merge line-by-line
 paste file1 file2 > file3
 
+# skip first line in output
+awk 'NR>1 {print $1}' <file>
+
 # split a file at every occurrence of PATTERN
 awk '/PATTERN/{f="newfile"++i;}{print > f;}' filename
 
