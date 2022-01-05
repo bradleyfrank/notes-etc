@@ -68,6 +68,9 @@ awk '/PATTERN/{f="newfile"++i;next}{print > f;}' filename
 # split a file on every Nth line
 awk 'NR%n==1{f="newfile"++i;}{print > f}' filename
 
+# find non-adjacent unique lines
+awk '!x[$0]++'
+
 # insert at top of file
 sed -i '1s/^/<added text> \n/' file
 
