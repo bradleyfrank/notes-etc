@@ -93,6 +93,19 @@ grep -lr "string1" path/to/files/ | xargs sed -i 's/string1/string2/g'
 ---
 
 ```sh
+# inline, no headers, multi
+fzf --multi --ansi -i -1 --height=50% --reverse -0 --inline-info --border rounded
+
+# inline, no headers, no multi
+fzf --no-multi --ansi -i -1 --height=50% --reverse -0 --inline-info --border rounded
+
+# inline, headers, multi
+fzf --multi --ansi -i -1 --height=50% --reverse -0 --header-lines=1 --inline-info --border rounded
+```
+
+---
+
+```sh
 # extract initrd files
 lz4 -d initrd.img initrd.cpio
 mkdir initrd
@@ -106,6 +119,13 @@ cpio -id < initrd.cpio
 ```sh
 # convert GitHub Markdown to DokuWiki format
 pandoc file.md -f gfm -t dokuwiki -o file.wiki
+
+# remove password from PDF
+qpdf --password=<password> --decrypt /path/to/input.pdf /path/to/output.pdf
+
+# encrypt/decrypt a file
+openssl enc -aes-256-cbc -salt -in /path/to/input -out /path/to/output
+openssl enc -d -aes-256-cbc -in /path/to/input -out /path/to/output
 
 # converting documents with LibreOffice
 soffice --headless --convert-to docx --outdir /tmp /path/to/doc
