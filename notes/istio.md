@@ -14,6 +14,5 @@ Ref: [what-envoy-version-is-istio-using](https://istio.io/v1.6/docs/ops/diagnost
 ---
 
 ```sh
-stern istio-ingressgateway -n istio-system -e health -e metrics -o json \
-  | jq -Sr '.message | fromjson'
+stern istio-ingressgateway -n istio-system -e health -e metrics -o json | jq -Sr '.message | fromjson'
 ```
