@@ -121,7 +121,7 @@ cpio -id < initrd.cpio
 pandoc file.md -f gfm -t dokuwiki -o file.wiki
 
 # remove password from PDF
-qpdf --password=<password> --decrypt /path/to/input.pdf /path/to/output.pdf
+pdftk /path/to/input.pdf input_pw PROMPT output /path/to/output.pdf
 
 # encrypt/decrypt a file
 openssl enc -aes-256-cbc -salt -in /path/to/input -out /path/to/output
