@@ -26,3 +26,27 @@ yum list installed php72u* \
 yum remove -y $(cat /tmp/ius-php-packages)
 yum install -y $(cat /tmp/ius-php-packages | sed 's/php72u/php/g')
 ```
+
+---
+
+```sh
+# GET GitHub Gist
+curl --fail --silent \
+  --header "Accept: application/vnd.github.v3+json" \
+  --header "Authorization: token <token>" \
+  https://api.github.com/gists/<id>
+
+# PATCH GitHub Gist
+curl --fail --silent \
+  --header "Accept: application/vnd.github.v3+json" \
+  --header "Authorization: token <token>" \
+  --request PATCH https://api.github.com/gists/<id> \
+  --data "{\"files\": { \"filename\": { \"content\": \"...\" }}}"
+
+# POST GitHub Gist
+curl --fail --silent \
+  --header "Accept: application/vnd.github.v3+json" \
+  --header "Authorization: token <token>" \
+  --request POST https://api.github.com/gists \
+  --data "{\"files\": { \"cmarks\": { \"content\": \"...\" }}}"
+```
