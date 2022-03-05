@@ -164,33 +164,6 @@ semanage port -a -t http_cache_port_t -p tcp <port>
 semanage port -a -t ssh_port_t -p tcp <port>
 ```
 
-## SSH
-
-```sh
-openssl rsa -text -noout -in /path/to/private/key # show key info
-ssh-keygen -lf /path/to/private/key # verify key
-ssh-keygen -R <hostname> -f ~/.ssh/known_hosts # remove host
-ssh-copy-id # install public key in server's authorized_keys file
-```
-
-```sh
-# start a tunnel from remote port 80 to local port 2001
-ssh -N -L 2001:localhost:80 remote
-```
-
-Local forwarding allows you to tunnel a port available via the remote system through your ssh connection. The port appears as a local port on your system (thus "local forwarding").
-
-```sh
-ssh -L 8000:localhost:8000 remote.example.com
-ssh -L 3306:db.example.com:3306 remote.example.com
-```
-
-Remote port forwarding lets you tunnel a port from your local system through your ssh connection, and make it available on the remote system.
-
-```sh
-ssh -R 6000:localhost:5000 remote.example.com
-```
-
 ## Account Management
 
 - `useradd` is the low-level command

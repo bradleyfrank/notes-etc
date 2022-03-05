@@ -206,3 +206,20 @@ tcpdump -w my_packet_capture.pcap
 ansible-vault encrypt --vault-id /path/to/password <file>
 ansible-vault encrypt_string --stdin-name <variable_name>
 ```
+
+---
+
+```sh
+openssl rsa -text -noout -in /path/to/private/key # show key info
+ssh-keygen -lf /path/to/private/key # verify key
+ssh-keygen -R <hostname> -f ~/.ssh/known_hosts # remove host
+ssh-copy-id # install public key in server's authorized_keys file
+
+# tunnel a remote port available via the proxy; i.e. remote = DB and proxy = bastion
+ssh -M -S <ctl_path> -fNL <local_port>:<remote_host>:<remote_port> <proxy_host>
+ssh -S <ctl_path> -O check <proxy_host> # check status of tunnel
+ssh -S <ctl_path> -O exit <proxy_host> # close the tunnel
+
+# tunnel a port from your local system through your ssh connection
+ssh -R <remote_port>:localhost:<local_port> <remote_host>
+```
