@@ -57,34 +57,34 @@ fdupes --recurse --reverse --delete --noprompt .
 paste file1 file2 > file3
 
 # skip first line in output
-awk 'NR>1 {print $1}' <file>
+awk 'NR>1 {print $1}'
 
 # split a file at every occurrence of PATTERN
-awk '/PATTERN/{f="newfile"++i;}{print > f;}' filename
+awk '/PATTERN/{f="newfile"++i;}{print > f;}'
 
 # split file at every occurrence of PATTERN but omit PATTERN from new file
-awk '/PATTERN/{f="newfile"++i;next}{print > f;}' filename
+awk '/PATTERN/{f="newfile"++i;next}{print > f;}'
 
 # split a file on every Nth line
-awk 'NR%n==1{f="newfile"++i;}{print > f}' filename
+awk 'NR%n==1{f="newfile"++i;}{print > f}'
 
 # find non-adjacent unique lines
 awk '!x[$0]++'
 
+# increment version number
+awk -vFS=. -vOFS=. '{$NF++;print}'
+
 # insert at top of file
-sed -i '1s/^/<added text> \n/' file
+sed -i '1s/^/<added text> \n/'
 
 # print all lines, inclusively, from search string
 sed -n '/foo/,$p'
 
 # print all lines up to the match
-sed '/PATTERN/q' FILE
-
-# print matching regex
-sed -rn 's/^ID=([a-z]+)/\1/p' /etc/os-release
+sed '/PATTERN/q'
 
 # delete all consecutive duplicate lines from a file
-sed '$!N; /^\(.*\)\n\1$/!P; D' file.txt
+sed '$!N; /^\(.*\)\n\1$/!P; D'
 
 # grep for a string, pipe to sed to replace text
 grep -lr "string1" path/to/files/ | xargs sed -i 's/string1/string2/g'

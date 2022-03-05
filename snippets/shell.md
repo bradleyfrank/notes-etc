@@ -13,6 +13,13 @@ ansible-playbook playbook.yml --list-tags \
 ---
 
 ```sh
+# parse OS information
+sed -rn 's/^ID=([a-z]+)/\1/p' /etc/os-release
+```
+
+---
+
+```sh
 # remove all the IUS php packages and replace them with remi php packages
 yum list installed php72u* \
   | sed -rn 's/^(php72u-.*)\.(x86_64|noarch).*/\1/p' > /tmp/ius-php-packages
