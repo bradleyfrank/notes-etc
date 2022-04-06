@@ -3,6 +3,10 @@
 ```sh
 # clone by tag
 git clone -b <tagname> <repository> .
+
+# find and retrieve a deleted file
+file=/path/to/file
+git checkout $(git rev-list -n 1 HEAD -- "$file")~1 -- "$file"
 ```
 
 ---
