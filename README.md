@@ -3,4 +3,4 @@
 - [Notes](notes/)
 - [Scripts](scripts/)
 - [Code Snippets](snippets/)
-- [Builds](builds/)
+- [Projects](projects/)

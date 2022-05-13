@@ -80,3 +80,10 @@ gh api search/issues\?q=repo:<org>/<repo>+is:pr+is:merged+merged:\>=<YYYY-MM-DD>
 gh api search/repositories\?q=org:<org>+language:<language> | jq ' .items | .[] | .name'
 gh api -X PATCH /repos/<org>/<repo> -f archived=true
 ```
+
+---
+
+```sh
+# authenticate to GitHub Docker Registry
+cat ~/.github_token | docker login docker.pkg.github.com -u <username> --password-stdin
+```

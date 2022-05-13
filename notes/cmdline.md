@@ -135,7 +135,7 @@ libreoffice --headless --convert-to epub /path/to/odt
 convert /path/to/file -resize 50% /path/to/output
 
 # extract gif images
-convert -coalesce file.gif out%05d.png
+convert -coalesce file.gif out.png
 
 # convert HEIC images
 heif-convert "$f" ${f/%.HEIC/.JPG}
@@ -222,4 +222,13 @@ ssh -S <ctl_path> -O exit <proxy_host> # close the tunnel
 
 # tunnel a port from your local system through your ssh connection
 ssh -R <remote_port>:localhost:<local_port> <remote_host>
+```
+
+---
+
+```sh
+gpg --full-generate-key
+gpg --export --armor <email>
+gpg --list-secret-keys --keyid-format=long
+gpg --armor --export <key_id>
 ```

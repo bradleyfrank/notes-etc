@@ -208,19 +208,17 @@ nmcli con up main
 # NetPlan
 cat << EOF > /etc/netplan/00-static.yaml
 network:
-    version: 2
-    ethernets:
-        eno2:
-            addresses:
-            - 192.168.1.40/24
-            gateway4: 192.168.1.1
-            nameservers:
-                addresses:
-                - 192.168.1.1
-                - 9.9.9.9
-                - 1.1.1.1
-                search:
-                - domain.tld
+  ethernets:
+    enp3s0:
+      dhcp4: no
+      addresses: [192.168.1.30/24]
+      routes:
+        - to: default
+          via: 192.168.1.1
+      nameservers:
+        addresses: [192.168.1.1]
+  version: 2
+  renderer: networkd
 EOF
 netplan apply
 ```

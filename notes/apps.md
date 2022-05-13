@@ -15,7 +15,7 @@ transcode-video --scan ./
 # transcode feature title to h265 mkv
 transcode-video --encoder x265 -o movie.mkv ./
 # transcode a specific title to h265 mkv
-transcode-video --encoder x265 --title $title -o $title.mkv ./
+transcode-video --encoder x265 --title <title> -o title.mkv ./
 ```
 
 ## Nextcloud
@@ -29,7 +29,7 @@ docker exec \
 # scan specific directory for new files
 docker exec nextcloud php occ files:scan \
     --user www-data \
-    --path="<user>/files/path/to/dir"
+    --path="path/to/dir"
 ```
 
 ## Plex
