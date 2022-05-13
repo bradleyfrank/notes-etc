@@ -20,8 +20,6 @@ alias help=run-help # for convenience
 
 For example, you can now run `help whence`, `help history`, etc.
 
----
-
 ## 2022-03-25
 
 1. [delta](https://github.com/dandavison/delta): A syntax-highlighting pager for git, diff, and grep output
@@ -50,8 +48,6 @@ Pineapple
 ```
 
 How does this work? You can read a wonderful walkthrough at [opensource.com](https://opensource.com/article/19/10/remove-duplicate-lines-files-awk).
-
----
 
 ## 2022-04-01
 
@@ -82,8 +78,6 @@ Data-1  Value-1
 Date-2  Value-2
 ```
 
----
-
 ## 2022-04-08
 
 1. [tealdeer](https://github.com/dbrgn/tealdeer): A very fast implementation of tldr in Rust
@@ -112,8 +106,6 @@ For example:
 2: file ending with a newline
 ```
 
----
-
 ## 2022-04-15
 
 1. [bandwhich](https://github.com/imsnif/bandwhich): Terminal bandwidth utilization tool
@@ -132,8 +124,6 @@ plutil -convert xml1 ~/Library/Preferences/com.google.Chrome.plist -o ~/com.goog
 # Back to binary format:
 plutil -convert binary1 ~/com.google.Chrome.xml -e plist
 ```
-
----
 
 ## 2022-04-22
 
@@ -159,8 +149,6 @@ Split the string by a period character, and `$NF` will represent the last segmen
 4
 ```
 
----
-
 ## 2022-04-29
 
 1. [file-arranger](https://github.com/anhsirk0/file-arranger): Simple & capable File/Directory arranger/cleaner
@@ -185,8 +173,6 @@ Example:
   -in /tmp/file1.enc -out /tmp/file1.txt
 ```
 
----
-
 ## 2022-05-06
 
 1. [git-sweep](https://github.com/arc90/git-sweep): Clean up Git branches that have been merged into master
@@ -208,4 +194,25 @@ Example:
 
 # Solution with process substitution:
 % mv =(sort /path/to/file1) /path/to/file1
+```
+
+## 2022-05-13
+
+1. [tablemark-cli](https://github.com/haltcase/tablemark-cli): Generate markdown tables from JSON data
+2. [gh-cli](https://github.com/cli/cli): GitHub’s official command line tool
+3. [bandwhich](https://github.com/imsnif/bandwhich): Terminal bandwidth utilization tool
+
+**Tip of the week:** Quickly retrieve a deleted file from a Git repository:
+
+```sh
+% file="./repo/path/to/file"
+git checkout $(git rev-list -n 1 HEAD -- "$file")~1 -- "$file"
+```
+
+Don't know the full path of the file?
+
+```sh
+% filename="filename"
+% sha="$(git log --all --full-history -1 --format=%H -- "**/$filename.*")" && \
+  git checkout "$sha"~1 -- "$(git diff-tree --no-commit-id --name-only -r "$sha" | grep "$filename")"
 ```
