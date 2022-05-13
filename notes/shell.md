@@ -73,3 +73,11 @@ readarray -t foo < <( find . -name * )
 # enter a password securely
 read -r -s -p "Enter password: " my_password
 ```
+
+---
+
+```sh
+# show zsh right prompt only on active prompt
+setopt transient_rprompt
+```
+
