@@ -52,7 +52,7 @@ zstyle ':vcs_info:git*+set-message:*' hooks extended-git
 
 ```sh
 precmd() {
-  local rc=$? eol=$'\n' _gitdir _kcxt _repo _prompt_color _pyver _columns="$(( COLUMNS - 1 ))"
+  local rc=$? eol=$'\n' _gitdir _kcxt _repo _prompt_color _pyver
   local _git_icon=$'\uf407' _py_icon=$'\uf81f' _k8s_icon=$'\ufd31' _hl=$'\u2015'
   local bold="%B" nobold="%b" fg_NoColor="%f" reset="%k%b%f"
   local fg_Blue="%F{33}" bg_Blue="%K{33}" \
@@ -62,7 +62,7 @@ precmd() {
         fg_Magenta="%F{125}" \
         fg_Red="%F{160}" \
         fg_White="%F{252}"
-  declare -A _prompt_lines
+  declare -A _prompt
 
   if [[ -n $SSH_CONNECTION ]]; then
     _HOSTNAME="${bold}${fg_Magenta}$(hostname -s)${reset} in "
@@ -84,14 +84,14 @@ precmd() {
   fi
 
   if [[ -n "$VIRTUAL_ENV" ]]; then
-    _PYENV="via ${fg_Cyan}${_py_icon} ${bold}$(python --version | grep -Eo '3\.[0-9]+')${reset} "
+    _PYENV="via ${fg_Cyan}${_py_icon} ${bold}$(python --version | grep -Po '3(\.\d+)+')${reset} "
   else
     _PYENV=""
   fi
 
   if _gitdir="$(git rev-parse --git-common-dir 2> /dev/null)"; then
     _repo="$(basename -s '.git' $(git config --get remote.origin.url || git rev-parse --show-toplevel))"
-    vcs_info; _GIT="on ${fg_Green}${_git_icon} ${bold}${_repo}/${fg_NoColor}${vcs_info_msg_0_}${nobold}"
+    vcs_info; _GIT="on ${fg_Green}${_git_icon} ${bold}${_repo}${fg_NoColor}/${vcs_info_msg_0_}${nobold}"
   else
     _GIT=""
   fi
@@ -102,13 +102,12 @@ precmd() {
     *) _prompt_color="${fg_Magenta}" ;;
   esac
 
-  _prompt_lines=(
-    [1]="${eol}${fg_White}$(printf %.1s $_hl{1..$COLUMNS})${fg_NoColor}"
-    [2]="${eol}${_HOSTNAME}${_CWD}${_KUBECTL}${_PYENV}${_GIT}"
-    [3]="${eol}${bold}${_prompt_color}%#${fg_NoColor}${nobold} "
+  _prompt=(
+    [1]="${eol}${_HOSTNAME}${_CWD}${_KUBECTL}${_PYENV}${_GIT}"
+    [2]="${eol}${bold}${_prompt_color}%#${fg_NoColor}${nobold} "
   )
 
-  PS1="${_prompt_lines[1]}${_prompt_lines[2]}${_prompt_lines[3]}"
+  PS1="${_prompt[1]}${_prompt[2]}"
 }
 
 +vi-extended-git() {
@@ -122,4 +121,4 @@ zstyle ':vcs_info:git*' formats '%F{64}%b%f %F{136}%u%c%m%f'
 zstyle ':vcs_info:git*' stagedstr '+'
 zstyle ':vcs_info:git*' unstagedstr '*'
 zstyle ':vcs_info:git*+set-message:*' hooks extended-git
-```sh
+```

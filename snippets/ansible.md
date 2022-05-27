@@ -156,3 +156,17 @@ nfs_mounts:
 ```sh
 --skip-tags {{ ansible_skip_tags | default(['never'], true) | join(',') }}
 ```
+
+---
+
+```yaml
+- name: Copy SSH keys
+  ansible.builtin.copy:
+    src: "{{ item['src'] }}"
+    dest: "{{ ansible_user_dir }}/.ssh"
+    mode: "{{ '0644' if 'pub' in item['src'] | basename else '0600' }}"
+  loop: "{{ lookup('community.general.filetree', 'ssh/') }}"
+  loop_control:
+    label: "{{ item['src'] | basename }}"
+  when: manage_ssh_config and (item['src'] | basename != 'config')
+```
