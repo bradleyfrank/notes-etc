@@ -12,7 +12,9 @@ gcloud projects create $PROJECT_ID \
 gcloud projects describe $(gcloud config list --format 'value(core.project)') --format 'value(name)'
 gcloud projects describe $(gcloud config get-value project) --format 'value(name)'
 gcloud info --format='value(config.paths.active_config_path)'
+gcloud info --format='value(config.paths.sdk_root'
 gcloud config configurations list --filter='is_active=True' --format='value(name)'
+gcloud config set project "$(gcloud projects list | _inline_fzf | awk '{print $1}')"
 ```
 
 ```sh
@@ -20,6 +22,16 @@ while read -r line; do
   base64 --decode <<< $line; printf '\n'
 done <<< "$(kubectl --context $CONTEXT get secret $SECRET -n $NAMESPACE -o json \
   | jq -r '.data | with_entries(select(.key|match("DB_";"i")))[]')"
+```
+
+```sh
+# remove duplicate contexts
+current_context=$(kubectl config current-context)
+kubectl config unset current-context &> /dev/null
+for context in $(kubectl config get-contexts | awk '(NR>1) {print $1}' | grep -E '^gke'); do
+    kubectl config delete-context "$context"
+done
+kubectl config set current-context "$(grep -o '[^_]*$' <<< "$current_context")" &> /dev/null
 ```
 
 ## Service Accounts

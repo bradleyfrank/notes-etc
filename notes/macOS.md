@@ -41,6 +41,9 @@ brew bundle cleanup --force
 # get app version
 brew info alacritty --cask --json=v2 | jq -r '.casks[].version'
 brew info toilet --json=v2 | jq -r '.formulae[].versions.stable'
+
+# get install status
+brew info google-cloud-sdk --json=v2 | jq -r '.casks[].installed,.formulae[].installed[].version'
 ```
 
 ---

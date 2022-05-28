@@ -145,12 +145,6 @@ nfs_mounts:
 
 ---
 
-```yaml
-- name: Register gcloud config location
-  ansible.builtin.shell: gcloud info --format="value(config.paths.active_config_path)"
-  register: gcloud_active_config_path
-```
-
 ---
 
 ```sh
