@@ -175,3 +175,18 @@ nfs_mounts:
 		github_package_versions: "{{ existing_packages | combine({name: latest_release}) }}"
 		cacheable: true
 ```
+
+---
+
+```yaml
+- name: Install kubectl
+  vars:
+    url: https://storage.googleapis.com/kubernetes-release/release
+    release: "{{ lookup('url', 'https://dl.k8s.io/release/stable.txt') }}"
+    arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else 'arm64' }}"
+  ansible.builtin.get_url:
+    url: "{{ url }}/{{ release }}/bin/{{ ansible_system | lower }}/{{ arch }}/kubectl"
+    dest: "{{ ansible_user_dir }}/.local/bin/"
+    mode: 0755
+```
+
