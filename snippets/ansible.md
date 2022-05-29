@@ -164,3 +164,14 @@ nfs_mounts:
     label: "{{ item['src'] | basename }}"
   when: manage_ssh_config and (item['src'] | basename != 'config')
 ```
+
+---
+
+```yaml
+- name: Record new version of {{ name }}
+	vars:
+		existing_packages: "{{ github_package_versions | default({}) }}"
+	set_fact:
+		github_package_versions: "{{ existing_packages | combine({name: latest_release}) }}"
+		cacheable: true
+```
