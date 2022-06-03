@@ -216,3 +216,72 @@ Don't know the full path of the file?
 % sha="$(git log --all --full-history -1 --format=%H -- "**/$filename.*")" && \
   git checkout "$sha"~1 -- "$(git diff-tree --no-commit-id --name-only -r "$sha" | grep "$filename")"
 ```
+
+## 2022-05-20
+
+1. [exa](https://github.com/ogham/exa): A modern replacement for `ls`
+2. [buku](https://github.com/jarun/buku): Personal mini-web in text
+3. [treeage](https://github.com/Kraymer/treeage): Listing contents of repository in a tree-like format with age metric
+
+**Tip of the week:** Move around directories quickly with various Zsh builtin methods:
+
+```sh
+# Return immediately to the previous directory:
+% cd -
+
+# With zsh, enable auto_cd [in ~/.zshrc] to move around without `cd`:
+% setopt auto_cd
+% .. # Go up a directory
+% ../foo # Go up a directory and enter the 'foo' directory
+% ../.. # Go up two directories
+
+# Set a "bookmarked" directory once auto_cd is enabled:
+% cdpath=(/path/to/important_directory)
+% cd important_directory/subdirectory
+
+# Keep a running list of directories visited:
+% setopt auto_pushd
+% cd /usr/local/bin; cd ~/.local/bin; cd ~/.config/gcloud
+% echo $dirstack # See your directory stack
+% cd -2 # Jump to element '2' in the stack (counting from the right, starting at zero)
+% cd +1 # Jump to element '1' in the stack (counting from the left, starting at zero)
+
+# Now the fun begins:
+% setopt pushd_ignore_dups # Prevent duplicates in the stack
+% cd "$(printf '%s\n' "${dirstack[@]}" | fzf)"
+```
+
+## 2022-05-27
+
+1. [lazydocker](https://github.com/jesseduffield/lazydocker): The lazier way to manage everything docker
+2. [fzf](https://github.com/junegunn/fzf): A command-line fuzzy finder
+3. [git-xargs](https://github.com/gruntwork-io/git-xargs): Make updates across multiple Github repositories with a single command
+
+**Tip of the week:** How to make a loading animation:
+
+```sh
+frames="/ | \\ -"
+while :; do
+  for f in $frames; do printf "\r%s Loading..." "$f"; sleep 0.5; done
+done
+```
+
+## 2022-06-03
+
+1. [fd](https://github.com/sharkdp/fd): A simple, fast and user-friendly alternative to 'find'
+2. [bandwhich](https://github.com/imsnif/bandwhich): Terminal bandwidth utilization tool
+3. [fileicon](https://github.com/mklement0/fileicon): macOS CLI for managing custom icons for files and folders
+
+**Tip of the week:** How to batch install Homebrew packages for a quick bootstrap:
+
+```sh
+# On the existing system, dump all installed packages (taps, formulas, casks, and app store):
+% brew bundle dump
+# This creates a 'Brewfile' in the current directory:
+% cat Brewfile
+# Copy this file to a new system and run:
+% brew bundle install
+# To keep your system up-to-date using this method check out:
+% brew bundle --help
+# Pair this with `stow` to quickly install dotfiles and get a new system running in no time!
+```
