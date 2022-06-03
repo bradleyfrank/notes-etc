@@ -81,3 +81,9 @@ read -r -s -p "Enter password: " my_password
 setopt transient_rprompt
 ```
 
+```sh
+frames="/ | \\ -"
+while :; do
+  for f in $frames; do printf "\r%s Loading..." "$f"; sleep 0.5; done
+done
+```
