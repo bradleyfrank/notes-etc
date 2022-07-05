@@ -354,3 +354,35 @@ curl whatismyip.akamai.com # find your public IP
 curl https://status.plaintext.sh/t # status for popular services
 curl wttr.in/<city> # weather
 ```
+
+## 2022-07-01
+
+1. [SpotiFetch](https://github.com/dotzenith/SpotiFetch): A fetch tool for Spotify
+2. [fkill-cli](https://github.com/sindresorhus/fkill-cli): Fabulously kill processes
+
+**Article of the week**: [Vim Tab Madness. Buffers vs Tabs](https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/)
+
+> Learning how to use and embrace buffers and windows leads to a far more cohesive editing experience in Vim and will help eliminate a lot of frustration when trying to use tabs unnaturally.
+
+**Tip of the week**: How to define and use variables in `jq`, with a real world script example:
+
+The below script uses `gh` to find open PRs across your O'Reilly team. Define the variable `team` using the value from GitHub.
+
+```sh
+#!/usr/bin/env bash
+members="$(gh api /orgs/oreillymedia/teams/${team}/members | jq -rj '.[]|"author:",.login," "')"
+gh api -X GET search/issues \
+  -f q="${members} is:open draft:false created:>$(date -d "90 days ago" +%Y-%m-%d)" \
+  | jq -jr 'def cls: {
+      "black": "\u001b[30m",
+      "yellow": "\u001b[33m",
+      "blue": "\u001b[34m",
+      "green": "\u001b[32m",
+      "bold": "\u001b[1m",
+      "reset": "\u001b[0m",
+    }; .items[] | "\n" +
+      cls.blue + cls.bold + .title + cls.reset + "\n" +
+      cls.green + cls.bold + ">> " + cls.reset + "Created on: ", cls.yellow + (.created_at|fromdate|strftime("%Y-%m-%d")) + cls.reset + "\n" +
+      cls.green + cls.bold + ">> " + cls.reset + "Created by: ", cls.green + .user.login + cls.reset + "\n" +
+      cls.green + cls.bold + ">> " + cls.reset + .pull_request.html_url + "\n\n"'
+```
