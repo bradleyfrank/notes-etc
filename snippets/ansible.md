@@ -190,3 +190,12 @@ nfs_mounts:
     mode: 0755
 ```
 
+---
+
+```j2
+{% for device in ansible_devices %}
+{% if ansible_devices[device]['vendor'] %}
+DEVICESCAN -a -s (S/../.././02|L/../../6/03) -o on -S on -n standby,q -m {{ email }}
+{% endif %}
+{% endfor %}
+```
