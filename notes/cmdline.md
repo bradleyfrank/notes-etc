@@ -211,6 +211,7 @@ ansible-vault encrypt_string --stdin-name <variable_name>
 
 ```sh
 openssl rsa -text -noout -in /path/to/private/key # show key info
+ssh-keygen -yf /path/to/private/key # restore a public key
 ssh-keygen -lf /path/to/private/key # verify key
 ssh-keygen -R <hostname> -f ~/.ssh/known_hosts # remove host
 ssh-copy-id # install public key in server's authorized_keys file
