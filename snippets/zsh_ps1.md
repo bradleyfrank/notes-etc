@@ -123,7 +123,7 @@ zstyle ':vcs_info:git*' unstagedstr '*'
 zstyle ':vcs_info:git*+set-message:*' hooks extended-git
 ```
 
----
+----
 
 ```sh
 precmd() {
@@ -200,3 +200,84 @@ zstyle ':vcs_info:git*' unstagedstr '*'
 zstyle ':vcs_info:git*+set-message:*' hooks extended-git
 ```
 
+----
+
+```sh
+precmd() {
+  typeset    rc=$? k8s_cxt prompt_color
+  typeset    PS1_CWD="" \
+             PS1_HOST="" \
+             PS1_K8S="" \
+             PS1_PY="" \
+             PS1_GIT=""
+  typeset -r eol=$'\n' \
+             icon_right_arrow=$'\uf554' \
+             icon_git=$'\ue725' \
+             icon_python=$'\ue606' \
+             icon_k8s=$'\ufd31' \
+             icon_apple=$'\ue711'
+  typeset -r bold="%B" \
+             unbold="%b" \
+             decolor="%f" \
+             reset="%b%f"
+  typeset -r blue="%F{33}" \
+             cyan="%F{37}" \
+             green="%F{64}" \
+             magenta="%F{125}" \
+             red="%F{160}" \
+             violet="%F{61}" \
+             yellow="%F{136}"
+  typeset -r vcs_branch="${green}%b${decolor}" \
+             vcs_status="${yellow}(%u%c)${decolor}" \
+             vcs_action="${red}[%a]${decolor}"
+  typeset -A prompt_lines
+
+  PS1_CWD="${bold}${blue}${icon_right_arrow} %1~ ${reset}"
+
+  zstyle ':vcs_info:git*' actionformats "${vcs_branch} ${vcs_status} ${vcs_action}"
+  zstyle ':vcs_info:git*' check-for-changes true
+  zstyle ':vcs_info:git*' formats "${vcs_branch} ${vcs_status}"
+  zstyle ':vcs_info:git*' stagedstr "+"
+  zstyle ':vcs_info:git*' unstagedstr "*"
+  zstyle ':vcs_info:git*+set-message:*' hooks extended-git
+
+  vcs_info
+
+  if [[ -n $SSH_CONNECTION && -z $TMUX ]]; then
+    PS1_HOST="${bold}${magenta}${icon_apple} %m ${reset}"
+  fi
+
+  if k8s_cxt="$(kubectl config current-context 2> /dev/null)"; then
+    [[ $k8s_cxt =~ ^gke ]] && k8s_cxt="${k8s_cxt##*_}"
+    PS1_K8S="using ${bold}${violet}${icon_k8s} ${k8s_cxt} ${reset}"
+  fi
+
+  if [[ -n "$VIRTUAL_ENV" ]]; then
+    PS1_PY="via ${bold}${cyan}${icon_python} $(python --version | grep -Po '3(\.\d+)') ${reset}"
+  fi
+
+  if [[ -n $vcs_info_msg_0_ ]]; then
+    PS1_GIT="on ${bold}${green}${icon_git} ${vcs_info_msg_0_}${unbold}"
+  fi
+
+  case "$rc" in
+    0) prompt_color="${green}"   ;;
+    1) prompt_color="${red}"     ;;
+    *) prompt_color="${magenta}" ;;
+  esac
+
+  prompt_lines=(
+    [1]="${eol}${PS1_HOST}${PS1_CWD}${PS1_K8S}${PS1_PY}${PS1_GIT}"
+    [2]="${eol}${bold}${prompt_color}%#${decolor}${unbold} "
+  )
+
+  PROMPT="${prompt_lines[1]}${prompt_lines[2]}"
+}
+
++vi-extended-git() {
+  if git rev-parse --git-common-dir >/dev/null 2>&1; then
+    if [[ -s $(git rev-parse --show-toplevel)/.git/refs/stash ]]; then hook_com[staged]+="$"; fi
+    if git status --porcelain | grep -q "^?? " 2> /dev/null; then hook_com[staged]+="?"; fi
+  fi
+}
+```
