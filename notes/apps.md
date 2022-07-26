@@ -1,11 +1,5 @@
 # Apps
 
-## MusicBrainz
-
-```none
-%%$if($lt(%discnumber%,10),0)%discnumber%x$if($lt(%tracknumber%,10),0)%tracknumber%-$replace(%title%, ,_)%%
-```
-
 ## HandBrake
 
 ```sh

@@ -20,6 +20,16 @@ sed -rn 's/^ID=([a-z]+)/\1/p' /etc/os-release
 ---
 
 ```sh
+# split a file at REGEX into multiple files
+while read -r line; do
+  [[ $line =~ REGEX ]] && f=FILENAME
+  echo "$line" >> "$f"
+done < FILE
+```
+
+---
+
+```sh
 # remove all the IUS php packages and replace them with remi php packages
 yum list installed php72u* \
   | sed -rn 's/^(php72u-.*)\.(x86_64|noarch).*/\1/p' > /tmp/ius-php-packages
