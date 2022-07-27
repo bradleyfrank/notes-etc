@@ -63,27 +63,8 @@ cat << 'EOF' | sudo tee /path/to/file
 EOF
 ```
 
----
-
-```sh
-# Bash 4+ read file into array
-mapfile -t foo < "file"
-readarray -t foo < <( find . -name * )
-
-# enter a password securely
-read -r -s -p "Enter password: " my_password
-```
-
----
-
 ```sh
 # show zsh right prompt only on active prompt
 setopt transient_rprompt
 ```
 
-```sh
-frames="/ | \\ -"
-while :; do
-  for f in $frames; do printf "\r%s Loading..." "$f"; sleep 0.5; done
-done
-```
