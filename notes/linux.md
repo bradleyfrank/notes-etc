@@ -1,4 +1,4 @@
-# Linux Management
+# Linux
 
 ## Package Management
 
@@ -66,6 +66,9 @@ mkfs -t xfs /dev/mapper/<vg>-<lv>  # format logical volume
 # extend & grow
 resize2fs /dev/device
 xfs_growfs /dev/device
+
+# repair filesystem
+xfs_repair -L /dev/device
 
 # remove filesystem
 wipefs -a /dev/device
@@ -221,4 +224,25 @@ network:
   renderer: networkd
 EOF
 netplan apply
+```
+
+## Desktop
+
+```sh
+# parse OS information
+sed -rn 's/^ID=([a-z]+)/\1/p' /etc/os-release
+
+# show desktop session (wayland/x11)
+loginctl show-session $(awk '/tty/ {print $1}' <(loginctl)) -p Type | awk -F= '{print $2}'
+echo $XDG_SESSION_TYPE
+
+# set default app
+gvfs-mime --set x-scheme-handler/https google-chrome.desktop
+
+# nVidia "night mode" fix for Linux
+cat << EOL >> /etc/X11/xorg.conf.d/20-nvidia.conf
+Section "Device"
+	Option "UseNvKmsCompositionPipeline" "false"
+EndSection
+EOL
 ```

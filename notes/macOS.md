@@ -24,11 +24,7 @@ pmset -g batt | grep -E 'InternalBattery' | cut -f2 | awk -F\; '{print $1$2}'
 
 # send to Safari reading list
 osascript -e 'tell application "Safari" to add reading list item "<url>"'
-```
 
----
-
-```sh
 # install macOS updates and reboot
 sudo softwareupdate -aiR
 
@@ -44,6 +40,10 @@ brew info toilet --json=v2 | jq -r '.formulae[].versions.stable'
 
 # get install status
 brew info google-cloud-sdk --json=v2 | jq -r '.casks[].installed,.formulae[].installed[].version'
+
+# use `visudo` to add entries to '/etc/sudoers.d'
+printf "%s ALL=(ALL) NOPASSWD: ALL\n" "$(id -un)" \
+  | sudo VISUAL="tee" visudo -f /etc/sudoers.d/nopasswd
 ```
 
 ---

@@ -36,8 +36,18 @@ kubectl get secret <secret> -o json | jq -r '.data."tls.crt"' | base64 --decode 
 kubectl api-resources
 kubectl api-versions
 
+# proxy
 kubectl proxy --port=8001
 curl http://localhost:8001/api/v1/namespace/default/pods
+
+# port-forward
+k port-forward -n vault --context gke_strong-keyword-184513_us-central1_playground-cluster vault-0 8200
+
+# finalizers
+kubectl get some-resource -o custom-columns=Kind:.kind,Name:.metadata.name,Finalizers:.metadata.finalizers
+kubectl patch some-resource/some-name \
+    --type json \
+    --patch='[ { "op": "remove", "path": "/metadata/finalizers" } ]'
 ```
 
 ## Troubleshooting
@@ -95,10 +105,4 @@ kubectl config-cleanup --print-removed --raw > ./kubeconfig-removed.yaml
 
 # print only the context names that were removed
 kubectl config-cleanup --print-removed -o=jsonpath='{ range.contexts[*] }{ .name }{"\n"}'
-
-# verify the current context against v1.18.6 swagger.json
-$ kubepug --k8s-version=v1.18.6
-
-# get all resources
-ketall --namespace=default
 ```

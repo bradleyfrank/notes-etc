@@ -7,8 +7,6 @@ Installing tmux & other CLI tools:
 3. Install Python3 package
 4. Install Pip
 
----
-
 ```sh
 # fix clock for 2FA
 synoservicecfg --pause ntpd-client

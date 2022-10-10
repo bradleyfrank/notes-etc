@@ -80,3 +80,27 @@ curl -X POST \
 ```
 
 The output will be the access token for the service account.
+
+## GCE Instances
+
+```sh
+gcloud compute instances create example-01 \
+	--project=strong-keyword-184513 \
+	--zone=us-central1-a \
+	--network-interface=no-address,network-tier=PREMIUM,subnet=us-central1-network \
+	--machine-type=e2-medium \
+	--scopes=https://www.googleapis.com/auth/cloud-platform \
+	--image-project=fedora-cloud \
+	--image-family=fedora-cloud-36
+
+gcloud compute instances create example-01 \
+	--project=strong-keyword-184513 \
+	--zone=us-central1-a \
+	--network-interface=network-tier=PREMIUM,subnet=us-central1-network \
+	--machine-type=e2-micro \
+	--scopes=https://www.googleapis.com/auth/cloud-platform \
+	--image-project=ubuntu-os-pro-cloud \
+	--image-family=ubuntu-pro-2204-lts
+
+# --network-interface=no-address,network-tier=PREMIUM,subnet=us-central1-network
+```

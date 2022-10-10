@@ -1,5 +1,7 @@
 # Shell
 
+## Substrings
+
 ```sh
 f="path1/path2/file.ext"
 len="${#f}"
@@ -18,7 +20,7 @@ dirname="$(dirname $f)"   # = "path1/path2"
 root="${f%%/*}"           # = "path1"
 ```
 
----
+## Random
 
 ```sh
 echo $RANDOM # integer between 0 and 32767
@@ -26,7 +28,7 @@ echo $(( $RANDOM % 10 )) # random number 1-10
 echo $SRANDOM # 32-bit pseudo-random number
 ```
 
----
+## Built-Ins
 
 ```sh
 $0   # name of the script
@@ -39,7 +41,7 @@ $@   # all parameters to script/function (sees arguments as separate word)
 $*   # all parameters to script/function (sees arguments as single word)
 ```
 
----
+## Redirection
 
 ```sh
 # basic output to a file
@@ -63,7 +65,7 @@ cat << 'EOF' | sudo tee /path/to/file
 EOF
 ```
 
----
+## Arrays
 
 ```sh
 # Bash 4+ read file into array
@@ -74,16 +76,20 @@ readarray -t foo < <( find . -name * )
 read -r -s -p "Enter password: " my_password
 ```
 
----
+## Other
 
 ```sh
-# show zsh right prompt only on active prompt
-setopt transient_rprompt
-```
-
-```sh
+# Create a loading animation
 frames="/ | \\ -"
 while :; do
   for f in $frames; do printf "\r%s Loading..." "$f"; sleep 0.5; done
 done
+```
+
+## Comparisons
+
+```sh
+if [ $a -eq 0 ] && [ $b -eq 0 ] && [ $c -eq 0 ] # ==>
+if [[ $a -eq 0 && $b -eq 0 && $c -eq 0 ]] # ==>
+if ((a==0 && b==0 && c==0))
 ```

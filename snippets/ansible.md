@@ -1,5 +1,19 @@
 # Ansible
 
+## macOS Python Version
+
+```yaml
+- name: get Python version
+  ansible.builtin.command:
+    cmd: brew info python --json
+  register: cmd_brew_info_python
+- name: show Python version
+  ansible.builtin.debug:
+    msg: "{{ cmd_brew_info_python['stdout'] | from_json | community.general.json_query('[].versions.stable') }}"
+```
+
+## NFS Mounts
+
 ```yaml
 nfs_mounts:
   - name: Media
@@ -51,9 +65,9 @@ nfs_mounts:
   loop: "{{ nfs_mounts }}"
 ```
 
- ---
+## Manage Snaps
 
- ```yaml
+```yaml
  - name: Purge Snaps and snapd
   block:
     - name: Get list of installed Snaps
@@ -103,7 +117,7 @@ nfs_mounts:
   when: "'desktop' in system_type"
 ```
 
----
+## Docker
 
 ```yaml
 - name: Configure Docker prereqs and pull containers
@@ -129,8 +143,6 @@ nfs_mounts:
   become: true
 ```
 
----
-
 ```yaml
 - name: Ensure pi user is added to the docker group.
   ansible.builtin.user:
@@ -143,15 +155,23 @@ nfs_mounts:
   meta: reset_connection
 ```
 
----
-
----
+## Tags
 
 ```sh
 --skip-tags {{ ansible_skip_tags | default(['never'], true) | join(',') }}
 ```
 
----
+```sh
+# convert Ansible tags into selectable list
+ansible-playbook playbook.yml --list-tags \
+  | sed -rn 's/^\s+TASK\sTAGS:\s\[(.*)\]$/\1/p' \
+  | sed 's/, /\n/g' \
+  | fzf --multi --ansi -i -1 --height=50% --reverse -0 --border \
+  | xargs \
+  | tr ' ' ','
+```
+
+## Copying Files
 
 ```yaml
 - name: Copy SSH keys
@@ -165,7 +185,7 @@ nfs_mounts:
   when: manage_ssh_config and (item['src'] | basename != 'config')
 ```
 
----
+## Setting Facts
 
 ```yaml
 - name: Record new version of {{ name }}
@@ -176,7 +196,7 @@ nfs_mounts:
 		cacheable: true
 ```
 
----
+## Downloading
 
 ```yaml
 - name: Install kubectl
@@ -190,7 +210,7 @@ nfs_mounts:
     mode: 0755
 ```
 
----
+## Templating
 
 ```j2
 {% for device in ansible_devices %}

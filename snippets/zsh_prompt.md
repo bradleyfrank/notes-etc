@@ -48,7 +48,7 @@ zstyle ':vcs_info:git*' unstagedstr '*'
 zstyle ':vcs_info:git*+set-message:*' hooks extended-git
 ```
 
-----
+***
 
 ```sh
 precmd() {
@@ -123,7 +123,7 @@ zstyle ':vcs_info:git*' unstagedstr '*'
 zstyle ':vcs_info:git*+set-message:*' hooks extended-git
 ```
 
-----
+***
 
 ```sh
 precmd() {
@@ -200,7 +200,7 @@ zstyle ':vcs_info:git*' unstagedstr '*'
 zstyle ':vcs_info:git*+set-message:*' hooks extended-git
 ```
 
-----
+***
 
 ```sh
 precmd() {
