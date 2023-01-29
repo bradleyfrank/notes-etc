@@ -33,15 +33,15 @@ ansible-vault encrypt_string --stdin-name <variable_name>
 
 ```sh
 pandoc file.md -f gfm -t dokuwiki -o file.wiki  # convert GitHub Markdown to DokuWiki format
-pdftk /path/to/input.pdf input_pw PROMPT output /path/to/output.pdf    # remove password from PDF
+pdftk /path/to/input.pdf input_pw PROMPT output /path/to/output.pdf  # remove password from PDF
 penssl enc -aes-256-cbc -salt -in /path/to/input -out /path/to/output  # encrypt file
-openssl enc -d -aes-256-cbc -in /path/to/input -out /path/to/output    # decrypt file
+openssl enc -d -aes-256-cbc -in /path/to/input -out /path/to/output  # decrypt file
 soffice --headless --convert-to docx --outdir /tmp /path/to/doc  # convert doc to docx
-libreoffice --headless --convert-to epub /path/to/odt            # convert odt to epub
+libreoffice --headless --convert-to epub /path/to/odt  # convert odt to epub
 convert /path/to/file -resize 50% /path/to/output  # resize image by 50%
-convert -coalesce file.gif out.png                 # extract gif images
-heif-convert "$f" ${f/%.HEIC/.JPG}                 # convert HEIC images
-ffmpeg -i "$f" "${f%.webp}.jpg"                    # convert webp images
+convert -coalesce file.gif out.png  # extract gif images
+heif-convert "$f" ${f/%.HEIC/.JPG}  # convert HEIC images
+ffmpeg -i "$f" "${f%.webp}.jpg"  # convert webp images
 ```
 
 ## Files and Strings
@@ -49,20 +49,15 @@ ffmpeg -i "$f" "${f%.webp}.jpg"                    # convert webp images
 ### Comparing
 
 ```sh
-# produce a patch file
-diff -Nur oldfile newfile > patchfile
-
-# compare two directories
-diff -q directory-1/ directory-2/
+fdupes --recurse --reverse --delete --noprompt .  # delete old duplicate images
+diff -Nur oldfile newfile > patchfile  # produce a patch file
+diff -q directory-1/ directory-2/  # compare two directories
 
 # compare two files
 vimdiff file1 file2
 code --diff file1 file2
 sdiff -s file1 file2
 comm -12 < (sort file1) < (sort file2)
-
-# delete old duplicate images
-fdupes --recurse --reverse --delete --noprompt .
 ```
 
 ### Matching
@@ -138,7 +133,7 @@ git config --global user.signingkey "$(cat ~/.ssh/id_rsa.pub)"
 git config --global commit.gpgsign true
 git config --global gpg.format ssh
 git config --global gpg.ssh.allowedSignersFile "$HOME/.ssh/allowed_signers"
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/allowed_signers
+printf "<email> %s" "$(awk '{print $1" "$2}' /path/to/public/key)" >> ~/.ssh/allowed_signers
 ```
 
 ## GitHub API
