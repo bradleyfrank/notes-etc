@@ -33,6 +33,7 @@ ansible-vault encrypt_string --stdin-name <variable_name>
 
 ```sh
 pandoc file.md -f gfm -t dokuwiki -o file.wiki  # convert GitHub Markdown to DokuWiki format
+qpdf --password="PASSWORD" --decrypt input.pdf output.pdf  # remove password from PDF
 pdftk /path/to/input.pdf input_pw PROMPT output /path/to/output.pdf  # remove password from PDF
 penssl enc -aes-256-cbc -salt -in /path/to/input -out /path/to/output  # encrypt file
 openssl enc -d -aes-256-cbc -in /path/to/input -out /path/to/output  # decrypt file
