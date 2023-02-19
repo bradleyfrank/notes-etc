@@ -511,6 +511,9 @@ makemkvcon backup --decrypt disc:0 /path/to/folder  # rip blu-ray as decrypted b
 makemkvcon mkv disc:0 all /path/to/folder           # rip blu-ray as mkv
 makemkvcon mkv iso:/path/to/file.iso all /path/to/output                 # convert ISO to mkv
 mkvmerge -o outfile.mkv infile_01.mp4 \+ infile_02.mp4 \+ infile_03.mp4  # merge mp4/mkv files
+
+# rip multiple videos simultaneously
+parallel --line-buffer --jobs 8 -a /path/to/list youtube-dl ...
 ```
 
 ## Vim
