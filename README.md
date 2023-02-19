@@ -513,6 +513,20 @@ makemkvcon mkv iso:/path/to/file.iso all /path/to/output                 # conve
 mkvmerge -o outfile.mkv infile_01.mp4 \+ infile_02.mp4 \+ infile_03.mp4  # merge mp4/mkv files
 ```
 
+## Vim
+
+```sh
+" use hybrid line numbering by default with automatic toggling
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
+" Change directory to the current buffer when opening files.
+set autochdir
+```
+
 ## zsh
 
 ```sh
