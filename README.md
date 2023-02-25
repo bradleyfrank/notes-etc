@@ -61,6 +61,17 @@ sdiff -s file1 file2
 comm -12 < (sort file1) < (sort file2)
 ```
 
+## Gaming
+
+```sh
+# build applyppf from source
+gcc app
+gcc applyppf3_linux.c -o applyppf
+
+# patch an ISO with a ppf
+applyppf a /path/to/ISO /path/to/PPF
+```
+
 ### Matching
 
 ```sh
