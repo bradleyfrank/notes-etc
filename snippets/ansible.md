@@ -101,11 +101,11 @@ ansible-playbook playbook.yml --list-tags \
 
 ```yaml
 - name: Record new version of {{ name }}
-	vars:
-		existing_packages: "{{ github_package_versions | default({}) }}"
-	set_fact:
-		github_package_versions: "{{ existing_packages | combine({name: latest_release}) }}"
-		cacheable: true
+  vars:
+    existing_packages: "{{ github_package_versions | default({}) }}"
+  set_fact:
+    github_package_versions: "{{ existing_packages | combine({name: latest_release}) }}"
+    cacheable: true
 ```
 
 ## Downloading

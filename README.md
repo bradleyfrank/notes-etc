@@ -284,6 +284,8 @@ wipefs -a /dev/device
 #### ZFS
 
 ```sh
+ls -1 /dev/disk/by-id/
+
 zpool create -f tank \
   mirror \
     ata-Hitachi_HDS5C3020ALA632_ML4220F316DDPK \
@@ -355,6 +357,9 @@ dnf upgrade --refresh
 dnf install dnf-plugin-system-upgrade
 dnf system-upgrade download --releasever=<version>
 dnf system-upgrade reboot
+
+# nix
+nix-env -f channel:nixpkgs-unstable -iA <package>
 ```
 
 ### SELinux
