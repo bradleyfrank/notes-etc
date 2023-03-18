@@ -544,6 +544,8 @@ augroup END
 
 " Change directory to the current buffer when opening files.
 set autochdir
+
+:%bd|e#  " close all other buffers; reopen last buffer
 ```
 
 ## zsh
