@@ -61,6 +61,12 @@ sdiff -s file1 file2
 comm -12 < (sort file1) < (sort file2)
 ```
 
+### Manipulation
+
+```sh
+jq -Rsa '.' < file.json  # escapes alll newlines and slashes
+```
+
 ## Gaming
 
 ```sh
