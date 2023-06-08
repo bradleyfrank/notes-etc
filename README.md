@@ -331,6 +331,28 @@ ip -4 -o addr show | grep -Ev '\blo\b' | grep -Po 'inet \K[\d.]+'
 ip -4 -o addr show | grep -Po 'inet \K[\d.]+'
 ```
 
+```sh
+# Remove pre-existing configs
+sudo rm /etc/netplan/00-installer-config*
+
+# Install static config
+cat << EOF | sudo tee /etc/netplan/00-home.conf
+network:
+  ethernets:
+    $(ip --brief -4 address show | grep -E '^e[n|m]' | awk '{print $1}'):
+      dhcp4: no
+      addresses: [192.168.1.10/24]
+      routes:
+        - to: default
+          via: 192.168.1.1
+      nameservers:
+        addresses: [192.168.1.1]
+  version: 2
+  renderer: NetworkManager
+EOF
+```
+
+
 ### Package Management
 
 ```sh
