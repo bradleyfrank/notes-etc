@@ -20,3 +20,10 @@ class myLogger:
         level = logging.getLevelName(lvl.upper())
         self.logger.log(level, msg)
 ```
+
+```python
+# parsing kubeconfig
+with open(Path.home() / ".kube/config", "r") as f:
+    kubeconfig = yaml.safe_load(f)
+clusters = [cluster["name"].split("_")[3] for cluster in kubeconfig["clusters"]]
+```
