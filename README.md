@@ -65,6 +65,7 @@ comm -12 < (sort file1) < (sort file2)
 
 ```sh
 jq -Rsa '.' < file.json  # escapes alll newlines and slashes
+index_name="${indexes[$i]%$'\n'}"  # removes newlines from the array value
 ```
 
 ## Gaming
