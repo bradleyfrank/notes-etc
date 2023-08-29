@@ -68,6 +68,12 @@ jq -Rsa '.' < file.json  # escapes alll newlines and slashes
 index_name="${indexes[$i]%$'\n'}"  # removes newlines from the array value
 ```
 
+### Substitution
+
+```sh
+${vcs_info_msg_0_/(#s):(#e)/}  # remove stand-alone color (i.e. '^:$')
+```
+
 ## Gaming
 
 ```sh
