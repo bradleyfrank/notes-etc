@@ -2,6 +2,9 @@
 
 Partial Vimscript to search files and insert a Markdown link.
 
+- [Keyboard shortcut to copy file name of selected file](https://github.com/junegunn/fzf.vim/issues/772)
+- [README-VIM](https://github.com/junegunn/fzf/blob/master/README-VIM.md)
+
 ```vim
 function! MDInsert()
   let l:searchPath = FindGitRoot()
