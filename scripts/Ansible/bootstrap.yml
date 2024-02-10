@@ -1,0 +1,28 @@
+---
+
+- name: Bootstrap localhost
+  hosts: localhost
+
+  vars:
+    sudoers:
+      Darwin: "/private/etc/sudoers.d/ansible"
+      Linux: "/etc/sudoers.d/ansible"
+
+  handlers:
+
+    - name: Remove passwordless sudo permissions
+      ansible.builtin.file:
+        path: "{{ sudoers[ansible_facts['system']] }}"
+        state: "absent"
+      become: true
+
+  tasks:
+
+    - name: Add temporary passwordless sudo permissions
+      ansible.builtin.template:
+        src: sudoers.j2
+        dest: "{{ sudoers[ansible_facts['system']] }}"
+        validate: /usr/sbin/visudo -csf %s
+        mode: "0644"
+      become: true
+      notify: Remove passwordless sudo permissions
