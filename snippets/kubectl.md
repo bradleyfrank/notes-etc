@@ -1,5 +1,14 @@
 # kubectl
 
+Expanding on #524 (comment) and many others, create kubectl-gety in $PATH and chmod a+x it:
+
+```sh
+#!/bin/bash
+kubectl get -o yaml "$@" | yq
+````
+Then run, e.g.: `kubectl gety pod xxx`
+
+
 ```sh
 # read secrets
 while read -r line; do
