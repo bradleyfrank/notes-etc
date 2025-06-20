@@ -1,0 +1,6 @@
+black==24.1.0
+colorama==0.4.6
+logzero==1.7.0
+musicbrainzngs==0.7.1
+mutagen==1.47.0
+pydub==0.25.1
